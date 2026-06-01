@@ -1,0 +1,13 @@
+{
+  "num_runs": 10,
+  "epochs_per_run": 15,
+  "successful_runs": 10,
+  "data_source": "synthetic_cifar10_like",
+  "test_acc_mean": 62.675,
+  "test_acc_std": 11.656956077810365,
+  "test_acc_min": 43.1,
+  "test_acc_max": 84.2,
+  "best_val_acc_mean": 90.47999999999999,
+  "model_params": 161450,
+  "total_time_seconds": 384.79999999999995
+}
