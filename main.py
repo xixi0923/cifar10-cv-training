@@ -65,6 +65,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--weight-decay", type=float, default=1e-4, help="Weight decay")
     parser.add_argument("--device", type=str, default="auto", help="Device: auto/cuda/cpu/mps")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument("--lr-scheduler", type=str, default="step",
+                        help="LR scheduler: step/cosine/none")
+    parser.add_argument("--mixed-precision", action="store_true",
+                        help="Enable mixed precision training (AMP, requires CUDA)")
 
     # Data
     parser.add_argument("--val-split", type=float, default=0.1, help="Validation split ratio")
@@ -118,6 +122,8 @@ def build_configs(args: argparse.Namespace) -> tuple:
         seed=args.seed,
         save_every=args.save_every,
         early_stopping_patience=args.early_stop,
+        lr_scheduler=args.lr_scheduler,
+        mixed_precision=args.mixed_precision,
     )
 
     log_cfg = LogConfig()

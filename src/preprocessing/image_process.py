@@ -26,17 +26,13 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 def horizontal_flip(image: np.ndarray) -> np.ndarray:
-    """Randomly flip the image horizontally (p=0.5)."""
-    if random.random() < 0.5:
-        return cv2.flip(image, 1)
-    return image
+    """Flip the image horizontally."""
+    return cv2.flip(image, 1)
 
 
 def vertical_flip(image: np.ndarray) -> np.ndarray:
-    """Randomly flip the image vertically (p=0.5)."""
-    if random.random() < 0.5:
-        return cv2.flip(image, 0)
-    return image
+    """Flip the image vertically."""
+    return cv2.flip(image, 0)
 
 
 def rotate(image: np.ndarray, angle: float) -> np.ndarray:

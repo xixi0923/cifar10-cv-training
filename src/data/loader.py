@@ -247,9 +247,8 @@ class _SubsetWithTransform(Dataset):
             img_np = (
                 image.numpy()
                 .transpose(1, 2, 0)
-                .clip(0, 1)
-                .astype(np.uint8)
-            )
+                .clip(0, 1) * 255
+            ).astype(np.uint8)
             img_np = self.transform_fn(img_np)
             img_np = np.transpose(img_np, (2, 0, 1)).astype(np.float32) / 255.0
             image = torch.from_numpy(img_np)

@@ -82,6 +82,7 @@ class ModelConfig:
     dropout_rate: float = 0.5
     num_classes: int = 10
     input_channels: int = 3
+    image_size: int = 32
 
 
 # ---------------------------------------------------------------------------

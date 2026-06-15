@@ -17,7 +17,7 @@ from typing import Optional
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.cuda.amp import GradScaler, autocast
+from torch.amp import GradScaler, autocast
 from torch.utils.data import DataLoader
 
 from config import TrainingConfig
@@ -59,7 +59,7 @@ class Trainer:
         self.scheduler = self._build_scheduler()
 
         # Mixed precision
-        self.scaler = GradScaler(enabled=cfg.mixed_precision and self.device.type == "cuda")
+        self.scaler = GradScaler("cuda", enabled=cfg.mixed_precision and self.device.type == "cuda")
 
         # Tracking
         self.history: dict[str, list] = {
@@ -197,10 +197,10 @@ class Trainer:
             images = images.to(self.device, non_blocking=True)
             labels = labels.to(self.device, non_blocking=True)
 
-            self.optimizer.zero_grad()
+            self.optimizer.zero_grad(set_to_none=True)
 
             if self.cfg.mixed_precision and self.device.type == "cuda":
-                with autocast(enabled=True):
+                with autocast("cuda", enabled=True):
                     outputs = self.model(images)
                     loss = self.criterion(outputs, labels)
                 self.scaler.scale(loss).backward()

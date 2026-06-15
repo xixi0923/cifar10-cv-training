@@ -115,8 +115,7 @@ def confusion_matrix(
         predicted as *j*.
     """
     matrix = np.zeros((num_classes, num_classes), dtype=np.int64)
-    for t, p in zip(y_true, y_pred):
-        matrix[int(t)][int(p)] += 1
+    np.add.at(matrix, (y_true, y_pred), 1)
     return matrix
 
 
@@ -321,6 +320,9 @@ def setup_logging(cfg: LogConfig) -> None:
     """Configure project-wide logging."""
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, cfg.log_level.upper(), logging.INFO))
+
+    # Clear existing handlers to avoid duplicates
+    root_logger.handlers.clear()
 
     formatter = logging.Formatter(
         "[%(asctime)s] %(levelname)-8s %(name)-20s — %(message)s",
