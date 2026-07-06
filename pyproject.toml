@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cifar10-cv-training"
+version = "0.1.0"
+description = "CIFAR-10 computer vision training project using OpenCV and PyTorch"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0" }
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "opencv-python-headless>=4.8.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.65.0",
+]
+
+[tool.setuptools]
+py-modules = ["config"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
