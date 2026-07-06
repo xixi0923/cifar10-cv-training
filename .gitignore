@@ -90,3 +90,6 @@ logs/
 # Output images
 output/
 results/
+
+# Experiment results (added by optimization)
+experiment_results/
